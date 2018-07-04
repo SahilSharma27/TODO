@@ -43,16 +43,19 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         setContentView(R.layout.activity_main);
         listview=findViewById(R.id.listview);
 
-        TaskOpenHelper openHelper=new TaskOpenHelper(this);
+        TaskOpenHelper openHelper= TaskOpenHelper.getInstance(getApplicationContext());
         SQLiteDatabase database=openHelper.getReadableDatabase();
         Cursor cursor=database.query(Contract.Task.TABLE_NAME,null,null,null,null,null,null);
         while (cursor.moveToNext()){
 
             String title=cursor.getString(cursor.getColumnIndex(Contract.Task.COLUMN_NAME));
             String dscrptn=cursor.getString(cursor.getColumnIndex(Contract.Task.DESCRIPTION));
+            long id=cursor.getLong(cursor.getColumnIndex(Contract.Task.COLUMN_ID));
             Tasks task=new Tasks(title,dscrptn);
+            task.setId(id);
             tasks.add(task);
         }
+        cursor.close();
         adapter=new Task_adapter(this,tasks);
         listview.setAdapter(adapter);
         listview.setOnItemClickListener(this);
@@ -64,6 +67,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
     @Override
     public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+        final Tasks T=tasks.get(position);
         final int pos=position;
 
         AlertDialog.Builder builder=new AlertDialog.Builder(this);
@@ -73,8 +77,16 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         builder.setMessage("Do you really want to delete ?");
         builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
 
+
+
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
+                TaskOpenHelper openHelper=TaskOpenHelper.getInstance(getApplicationContext());
+                SQLiteDatabase db=openHelper.getWritableDatabase();
+                long id=T.getId();
+                String[] selectionArgs = {id + ""};
+
+                db.delete(Contract.Task.TABLE_NAME,Contract.Task.COLUMN_ID + " = ?",selectionArgs);
 
                 tasks.remove(pos);
                 adapter.notifyDataSetChanged();
@@ -137,15 +149,22 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                 String title = data.getStringExtra(Main2Activity.TITLE_KEY);
                 String des = data.getStringExtra(Main2Activity.DESCRIPTION_KEY);
                 Tasks newTask = new Tasks(title, des);
-                TaskOpenHelper openHelper = new TaskOpenHelper(this);
+                TaskOpenHelper openHelper = TaskOpenHelper.getInstance(this);
                 SQLiteDatabase database=openHelper.getWritableDatabase();
 
                 ContentValues contentValues=new ContentValues();
                 contentValues.put(Contract.Task.COLUMN_NAME,newTask.getTitle());
                 contentValues.put(Contract.Task.DESCRIPTION,newTask.getDescription());
-                database.insert(Contract.Task.TABLE_NAME,null,contentValues);
-                tasks.add(newTask);
-                adapter.notifyDataSetChanged();
+                  long id=database.insert(Contract.Task.TABLE_NAME,null,contentValues);
+                    if(id>-1L){
+                        newTask.setId(id);
+                        tasks.add(newTask);
+                        adapter.notifyDataSetChanged();
+
+                    }
+
+
+
 
             }
 
@@ -156,7 +175,15 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
                String title = data.getStringExtra(DescriptionActivity.TITLE);
                String des = data.getStringExtra(DescriptionActivity.DESCRIPTION);
-               task.setTitle(title);
+              TaskOpenHelper openHelper = TaskOpenHelper.getInstance(this);
+              SQLiteDatabase database=openHelper.getWritableDatabase();
+              ContentValues contentValues=new ContentValues();
+              contentValues.put(Contract.Task.COLUMN_NAME,title);
+              contentValues.put(Contract.Task.DESCRIPTION,des);
+              database.update(Contract.Task.TABLE_NAME,contentValues," id="+task.getId(),null);
+
+
+              task.setTitle(title);
                task.setDescription(des);
                adapter.notifyDataSetChanged();
           }
