@@ -35,7 +35,9 @@ public class TaskOpenHelper extends SQLiteOpenHelper {
         String taskSql= " CREATE TABLE " + Contract.Task.TABLE_NAME  + " ( " +
                 Contract.Task.COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT , " +
                 Contract.Task.COLUMN_NAME + " TEXT  , " +
-                Contract.Task.DESCRIPTION + " TEXT  ) ";
+                Contract.Task.DESCRIPTION + " TEXT  , " +
+                Contract.Task.DATE + " TEXT  , " +
+                Contract.Task.TIME + " TEXT )";
 
 
         db.execSQL(taskSql);

@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.android.todo">
 
+    <uses-permission android:name="android.permission.READ_SMS" />
+    <uses-permission android:name="android.permission.RECEIVE_SMS" />
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -18,7 +20,14 @@
         </activity>
         <activity android:name=".Main2Activity" />
         <activity android:name=".DescriptionActivity" />
-        <activity android:name=".EditTaskActivity"></activity>
+        <activity android:name=".EditTaskActivity" />
+
+        <receiver
+            android:name=".MyReciever"
+            android:enabled="true"
+            android:exported="true" />
+
+        <activity android:name=".SettingsActivity"></activity>
     </application>
 
 </manifest>

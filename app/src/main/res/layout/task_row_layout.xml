@@ -10,8 +10,11 @@
         android:layout_height="wrap_content"
         android:text="Name"
         android:textSize="40sp"
+        android:textColor="#000000"
+        android:background="#D0F9FA"
+        android:fontFamily="casual"
+        android:textStyle="bold"
+        android:layout_marginTop="2dp"
+        android:paddingLeft="8dp"
         />
-
-
-
 </LinearLayout>
