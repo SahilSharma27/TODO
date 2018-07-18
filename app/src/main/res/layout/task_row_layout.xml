@@ -12,7 +12,7 @@
         android:layout_marginTop="8dp"
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
-        card_view:cardCornerRadius="20dp"
+        card_view:cardCornerRadius="10dp"
     >
     <TextView
         android:id="@+id/taskTitle"
@@ -22,7 +22,7 @@
         android:textSize="40sp"
         android:textColor="#000000"
         android:background="#ffffff"
-        android:fontFamily="Bebas"
+        android:fontFamily="Museo Slab"
         android:padding="8dp"
 
         />

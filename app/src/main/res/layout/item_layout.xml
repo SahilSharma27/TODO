@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#63ECF0"
+    android:background="#e5e5e5"
     android:orientation="vertical">
 
     <EditText
@@ -10,7 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Title"
-        android:inputType="textPersonName" />
+        android:inputType="textCapSentences" />
 
     <EditText
         android:id="@+id/description"
@@ -18,7 +18,7 @@
         android:layout_height="wrap_content"
         android:layout_weight="5"
         android:hint="Description"
-        android:inputType="text" />
+        android:inputType="textCapSentences" />
 
     <LinearLayout
         android:layout_width="match_parent"
