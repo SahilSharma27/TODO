@@ -26,6 +26,14 @@
             android:name=".MyReciever"
             android:enabled="true"
             android:exported="true" />
+        <receiver
+            android:name=".SmsReciever"
+            android:enabled="true"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.provider.Telephony.SMS_RECEIVED" />
+            </intent-filter>
+        </receiver>
 
         <activity android:name=".SettingsActivity"></activity>
     </application>

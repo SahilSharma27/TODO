@@ -19,8 +19,8 @@ import java.util.Calendar;
 public class EditTaskActivity extends AppCompatActivity {
     EditText ed1;
     EditText ed2;
-    TextView t1;
-    TextView t2;
+    EditText ed3;
+    EditText ed4;
     Button btn;
     Intent intent;
     public String Title;
@@ -40,8 +40,8 @@ public class EditTaskActivity extends AppCompatActivity {
         setContentView(R.layout.activity_edit_task);
         ed1=findViewById(R.id.editText);
         ed2=findViewById(R.id.editText2);
-        t1 = findViewById(R.id.dateEdit);
-        t2 = findViewById(R.id.timeEdit);
+        ed3 = findViewById(R.id.dateEdit);
+        ed4 = findViewById(R.id.timeEdit);
         btn=findViewById(R.id.btn);
 
         intent=getIntent();
@@ -52,8 +52,8 @@ public class EditTaskActivity extends AppCompatActivity {
         Time = intent.getStringExtra(DescriptionActivity.TIME);
         ed1.setText(Title);
         ed2.setText(Description);
-        t1.setText(Date);
-        t2.setText(Time);
+        ed3.setText(Date);
+        ed4.setText(Time);
 
 
     }
@@ -84,7 +84,7 @@ public class EditTaskActivity extends AppCompatActivity {
                 public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
 
                     Time = hourOfDay + ":" + minute;
-                    t2.setText(Time);
+                    ed3.setText(Time);
 
                 }
             }, hour, minute, false);
@@ -100,7 +100,7 @@ public class EditTaskActivity extends AppCompatActivity {
 
                     ++month;
                     Date = dayOfMonth + "/" + month + "/" + year;
-                    t1.setText(Date);
+                    ed4.setText(Date);
                 }
             }, year, month, day);
 
@@ -111,8 +111,8 @@ public class EditTaskActivity extends AppCompatActivity {
    public void editDetails(View view){
        Title= ed1.getText().toString();
        Description = ed2.getText().toString();
-       Date = t1.getText().toString();
-       Time = t2.getText().toString();
+       Date = ed3.getText().toString();
+       Time = ed4.getText().toString();
        intent.putExtra(TASK_TITLE,Title);
        intent.putExtra(TASK_DESCRIPTION,Description);
        intent.putExtra(TASK_DATE, Date);

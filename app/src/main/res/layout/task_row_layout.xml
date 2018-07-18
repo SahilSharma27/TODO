@@ -1,8 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+
+    android:orientation="vertical">
+
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        card_view:cardCornerRadius="20dp"
     >
     <TextView
         android:id="@+id/taskTitle"
@@ -11,10 +21,11 @@
         android:text="Name"
         android:textSize="40sp"
         android:textColor="#000000"
-        android:background="#D0F9FA"
-        android:fontFamily="casual"
-        android:textStyle="bold"
-        android:layout_marginTop="2dp"
-        android:paddingLeft="8dp"
+        android:background="#ffffff"
+        android:fontFamily="Bebas"
+        android:padding="8dp"
+
         />
+
+    </android.support.v7.widget.CardView>
 </LinearLayout>

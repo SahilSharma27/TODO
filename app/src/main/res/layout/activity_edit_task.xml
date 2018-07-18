@@ -45,12 +45,11 @@
         android:layout_weight="4"
         android:textSize="30sp" />
 
-    <TextView
+    <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/dateEdit"
         android:layout_weight="1"
-        android:text="date"
         android:onClick="editDateTime"
         android:textStyle="bold"
         android:fontFamily="Bebas"
@@ -59,11 +58,10 @@
         android:paddingTop="16dp"
         android:textSize="30sp" />
 
-    <TextView
+    <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/timeEdit"
-        android:text="time"
         android:layout_weight="1"
         android:textStyle="bold"
         android:fontFamily="Bebas"
