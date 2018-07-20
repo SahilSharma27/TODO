@@ -61,7 +61,10 @@ public class Main2Activity extends AppCompatActivity {
         minute = clndr.get(Calendar.MINUTE);
 
         t1.setText(day + "/" + month + "/" + year);
-        t2.setText(hour + ":" + minute);
+                 if(minute<10)
+            t2.setText(hour +":0"+minute);
+                 else
+                     t2.setText(hour + ":" + minute);
 
 
     }
@@ -74,8 +77,12 @@ public class Main2Activity extends AppCompatActivity {
             TimePickerDialog timePickerDialog = new TimePickerDialog(Main2Activity.this, new TimePickerDialog.OnTimeSetListener() {
                 @Override
                 public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-
-                    timeTask = hourOfDay + ":" + minute;
+                    if(minute<10){
+                        timeTask=hourOfDay + ":0" +minute;
+                    }
+                    else {
+                        timeTask = hourOfDay + ":" + minute;
+                    }
                     t2.setText(timeTask);
                     //     Toast.makeText(getApplicationContext(),hour+" "+minute,Toast.LENGTH_LONG).show();
 

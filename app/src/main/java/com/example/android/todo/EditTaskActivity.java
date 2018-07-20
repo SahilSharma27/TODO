@@ -82,9 +82,13 @@ public class EditTaskActivity extends AppCompatActivity {
             TimePickerDialog timePickerDialog = new TimePickerDialog(EditTaskActivity.this, new TimePickerDialog.OnTimeSetListener() {
                 @Override
                 public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-
-                    Time = hourOfDay + ":" + minute;
-                    ed3.setText(Time);
+                    if(minute>9) {
+                        Time = hourOfDay + ":" + minute;
+                    }
+                    else {
+                        Time=hourOfDay + ":"+"0" +minute;
+                    }
+                    ed4.setText(Time);
 
                 }
             }, hour, minute, false);
@@ -100,7 +104,7 @@ public class EditTaskActivity extends AppCompatActivity {
 
                     ++month;
                     Date = dayOfMonth + "/" + month + "/" + year;
-                    ed4.setText(Date);
+                    ed3.setText(Date);
                 }
             }, year, month, day);
 

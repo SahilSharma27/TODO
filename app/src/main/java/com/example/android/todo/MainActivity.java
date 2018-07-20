@@ -110,6 +110,11 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                 tasks.remove(pos);
                 adapter.notifyDataSetChanged();
                 Snackbar.make(view, "TODO Deleted..", Snackbar.LENGTH_LONG).setAction("Action", null).show();
+                AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
+                Intent intent = new Intent(getApplicationContext(), MyReciever.class);
+                PendingIntent pendingIntent = PendingIntent.getBroadcast(getApplicationContext(), 2, intent, 0);
+                pendingIntent.cancel();
+                alarmManager.cancel(pendingIntent);
             }
         });
 
@@ -253,6 +258,22 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
               contentValues.put(Contract.Task.DATE, date);
               contentValues.put(Contract.Task.TIME, time);
               database.update(Contract.Task.TABLE_NAME,contentValues," id="+task.getId(),null);
+              String DateTime = date + " " + time;
+
+              AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
+              Intent intent = new Intent(this, MyReciever.class);
+              PendingIntent pendingIntent = PendingIntent.getBroadcast(this, 2, intent, 0);
+              SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+              try {
+                  Date mDate = sdf.parse(DateTime);
+                  long timeInMilliseconds = mDate.getTime();
+                  //  Toast.makeText(getApplicationContext(),timeInMilliseconds+"",Toast.LENGTH_LONG).show();
+                  alarmManager.set(AlarmManager.RTC_WAKEUP, timeInMilliseconds, pendingIntent);
+                  // System.out.println("Date in milli :: " + timeInMilliseconds);
+
+              } catch (ParseException e) {
+                  e.printStackTrace();
+              }
 
 
               task.setTitle(title);

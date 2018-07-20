@@ -1,6 +1,7 @@
 package com.example.android.todo;
 
 import android.Manifest;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
@@ -11,6 +12,7 @@ import android.widget.Switch;
 import android.widget.Toast;
 
 public class SettingsActivity extends AppCompatActivity {
+    SharedPreferences pref;
 
 
     @Override
@@ -18,8 +20,15 @@ public class SettingsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings);
 
-        Switch switchButton = findViewById(R.id.switchONOFF
-        );
+        Switch switchButton = findViewById(R.id.switchONOFF);
+        pref = getApplicationContext().getSharedPreferences( "MyPref" , MODE_PRIVATE);
+        Boolean value = pref.getBoolean( "SwitchON" , false );
+        if(value==true){
+            switchButton.setChecked(true);
+        }
+        else if(value==false){
+            switchButton.setChecked(false);
+        }
 
         switchButton.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
@@ -33,6 +42,15 @@ public class SettingsActivity extends AppCompatActivity {
                         String[] permissions = {Manifest.permission.READ_SMS, Manifest.permission.RECEIVE_SMS};
                         ActivityCompat.requestPermissions(SettingsActivity.this, permissions, 1011);
                     }
+
+                }
+                else if(isChecked==false){
+                    pref = getApplicationContext().getSharedPreferences( "MyPref" , MODE_PRIVATE);
+                    SharedPreferences.Editor editor;
+                    editor = pref.edit();
+                    editor.putBoolean( "SwitchON" , false );
+                    editor.apply();
+
                 }
             }
         });
@@ -52,7 +70,17 @@ public class SettingsActivity extends AppCompatActivity {
             if (smsReadPermission == PackageManager.PERMISSION_GRANTED && smsReceivePermission == PackageManager.PERMISSION_GRANTED) {
 
                 Toast.makeText(this, "Permissions Granted!", Toast.LENGTH_SHORT).show();
+                pref = getApplicationContext().getSharedPreferences( "MyPref" , MODE_PRIVATE);
+                SharedPreferences.Editor editor;
+                editor = pref.edit();
+                editor.putBoolean( "SwitchON" , true );
+                editor.apply();
             } else {
+                pref = getApplicationContext().getSharedPreferences( "MyPref" , MODE_PRIVATE);
+                SharedPreferences.Editor editor;
+                editor = pref.edit();
+                editor.putBoolean( "SwitchON" , false );
+                editor.apply();
 
                 Toast.makeText(this, "Grant Permissions", Toast.LENGTH_SHORT).show();
             }

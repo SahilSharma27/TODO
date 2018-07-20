@@ -35,6 +35,7 @@ public class DescriptionActivity extends AppCompatActivity {
         t3 = findViewById(R.id.date);
         t4 = findViewById(R.id.time);
         btn=findViewById(R.id.back);
+        btn.setVisibility(View.GONE);
 
         btn.setEnabled(false);
         intent=getIntent();
@@ -67,6 +68,7 @@ public class DescriptionActivity extends AppCompatActivity {
             intent1.putExtra(DESCRIPTION, description);
             intent1.putExtra(DATE, date);
             intent1.putExtra(TIME, time);
+            btn.setVisibility(View.VISIBLE);
             btn.setEnabled(true);
             startActivityForResult(intent1,EDIT_TASK_CODE);
 

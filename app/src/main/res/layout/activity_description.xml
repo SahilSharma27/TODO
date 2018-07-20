@@ -79,6 +79,7 @@
         android:textColor="#000000"
         android:paddingTop="16dp"
         android:fontFamily="Museo Slab"
+        android:gravity="center_horizontal"
         android:layout_weight="1" />
 
     <TextView
@@ -101,7 +102,9 @@
         android:paddingLeft="16dp"
         android:textColor="#000000"
         android:paddingTop="16dp"
+        android:textSize="20sp"
         android:fontFamily="Museo Slab"
+        android:gravity="center_horizontal"
         android:layout_weight="1" />
     <Button
         android:id="@+id/back"
