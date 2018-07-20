@@ -13,6 +13,7 @@ import android.widget.Toast;
 
 public class SettingsActivity extends AppCompatActivity {
     SharedPreferences pref;
+    Switch switchButton;
 
 
     @Override
@@ -20,9 +21,9 @@ public class SettingsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings);
 
-        Switch switchButton = findViewById(R.id.switchONOFF);
-        pref = getApplicationContext().getSharedPreferences( "MyPref" , MODE_PRIVATE);
-        Boolean value = pref.getBoolean( "SwitchON" , false );
+        switchButton = findViewById(R.id.switchONOFF);
+        SharedPreferences pref1 = getApplicationContext().getSharedPreferences( "MyPref" , MODE_PRIVATE);
+        Boolean value = pref1.getBoolean( "SwitchON" , false );
         if(value==true){
             switchButton.setChecked(true);
         }
@@ -41,7 +42,14 @@ public class SettingsActivity extends AppCompatActivity {
 
                         String[] permissions = {Manifest.permission.READ_SMS, Manifest.permission.RECEIVE_SMS};
                         ActivityCompat.requestPermissions(SettingsActivity.this, permissions, 1011);
+
                     }
+                    pref = getApplicationContext().getSharedPreferences( "MyPref" , MODE_PRIVATE);
+                    SharedPreferences.Editor editor;
+                    editor = pref.edit();
+                    editor.putBoolean( "SwitchON" , true );
+                    editor.apply();
+
 
                 }
                 else if(isChecked==false){
@@ -67,6 +75,7 @@ public class SettingsActivity extends AppCompatActivity {
             int smsReadPermission = grantResults[0];
             int smsReceivePermission = grantResults[1];
 
+
             if (smsReadPermission == PackageManager.PERMISSION_GRANTED && smsReceivePermission == PackageManager.PERMISSION_GRANTED) {
 
                 Toast.makeText(this, "Permissions Granted!", Toast.LENGTH_SHORT).show();
@@ -81,6 +90,7 @@ public class SettingsActivity extends AppCompatActivity {
                 editor = pref.edit();
                 editor.putBoolean( "SwitchON" , false );
                 editor.apply();
+               // switchButton.setChecked(false);
 
                 Toast.makeText(this, "Grant Permissions", Toast.LENGTH_SHORT).show();
             }

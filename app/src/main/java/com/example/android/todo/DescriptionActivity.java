@@ -17,7 +17,7 @@ public class DescriptionActivity extends AppCompatActivity {
     TextView t4;
     Intent intent;
     String title, description, date, time;
-    Button btn ;
+   // Button btn ;
     public static final String TITLE="title";
     public static final String DESCRIPTION="description";
     public static final String DATE = "date";
@@ -34,10 +34,10 @@ public class DescriptionActivity extends AppCompatActivity {
         t2=findViewById(R.id.Description);
         t3 = findViewById(R.id.date);
         t4 = findViewById(R.id.time);
-        btn=findViewById(R.id.back);
-        btn.setVisibility(View.GONE);
+      //  btn=findViewById(R.id.back);
+      //  btn.setVisibility(View.GONE);
 
-        btn.setEnabled(false);
+      //  btn.setEnabled(false);
         intent=getIntent();
          title=intent.getStringExtra(MainActivity.CLICKED_TASK_TITLE);
          description=intent.getStringExtra(MainActivity.CLICKED_TASK_DESCRIPTION);
@@ -47,6 +47,7 @@ public class DescriptionActivity extends AppCompatActivity {
         t2.setText(description);
         t3.setText(date);
         t4.setText(time);
+
     }
 
     @Override
@@ -68,15 +69,15 @@ public class DescriptionActivity extends AppCompatActivity {
             intent1.putExtra(DESCRIPTION, description);
             intent1.putExtra(DATE, date);
             intent1.putExtra(TIME, time);
-            btn.setVisibility(View.VISIBLE);
-            btn.setEnabled(true);
+           // btn.setVisibility(View.VISIBLE);
+          //  btn.setEnabled(true);
             startActivityForResult(intent1,EDIT_TASK_CODE);
 
 
         }
         return super.onOptionsItemSelected(item);
     }
-    public void edited(View view){
+    public void edited(){
         //   Toast.makeText(getApplicationContext(),date,Toast.LENGTH_LONG).show();
         Intent intent3=new Intent(this,MainActivity.class);
         intent3.putExtra(TITLE,title);
@@ -101,6 +102,7 @@ public class DescriptionActivity extends AppCompatActivity {
                 t2.setText(description);
                 t3.setText(date);
                 t4.setText(time);
+                edited();
 
             }
         }

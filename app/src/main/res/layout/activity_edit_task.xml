@@ -20,6 +20,7 @@
         android:paddingTop="16dp"
         android:textSize="20sp" />
     <EditText
+        android:layout_marginStart="16dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:inputType="text"
@@ -41,6 +42,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:inputType="text"
+        android:layout_marginStart="16dp"
         android:id="@+id/editText2"
         android:layout_weight="4"
         android:textSize="30sp" />
@@ -51,8 +53,9 @@
         android:id="@+id/dateEdit"
         android:layout_weight="1"
         android:onClick="editDateTime"
-        android:paddingLeft="16dp"
+        android:layout_marginStart="16dp"
         android:textColor="#000000"
+        android:focusable="false"
         android:paddingTop="16dp"
         android:textSize="30sp" />
 
@@ -61,7 +64,8 @@
         android:layout_height="wrap_content"
         android:id="@+id/timeEdit"
         android:layout_weight="1"
-        android:paddingStart="16dp"
+        android:layout_marginStart="16dp"
+        android:focusable="false"
         android:textColor="#000000"
         android:paddingTop="16dp"
         android:onClick="editDateTime"
